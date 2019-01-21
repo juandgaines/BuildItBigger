@@ -1,6 +1,8 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -12,9 +14,11 @@ import com.mytechideas.detailsactivity.DetailActivity;
 import com.mytechideas.javajokes.Joker;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EndpointsAsyncTask.AsyncResponse {
 
     private static final String JOKE_STRING= "joke";
+
+    private EndpointsAsyncTask asyncTask= new EndpointsAsyncTask();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +51,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void tellJoke(View view) {
         Joker joker = new Joker();
+        
+        asyncTask.execute(this);
 
-        Intent intent = new Intent(this,DetailActivity.class);
-        intent.putExtra(JOKE_STRING,joker.getJoke());
-
-        startActivity(intent);
         //Toast.makeText(this, joker.getJoke(), Toast.LENGTH_SHORT).show();
     }
 
 
+    @Override
+    public void processFinish(String output) {
+
+        Intent intent = new Intent(this,DetailActivity.class);
+        intent.putExtra(JOKE_STRING,output);
+        startActivity(intent);
+    }
 }
