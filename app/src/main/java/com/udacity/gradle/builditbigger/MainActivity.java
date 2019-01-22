@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
 
     public void tellJoke(View view) {
         Joker joker = new Joker();
-        
         asyncTask.execute(this);
 
         //Toast.makeText(this, joker.getJoke(), Toast.LENGTH_SHORT).show();
