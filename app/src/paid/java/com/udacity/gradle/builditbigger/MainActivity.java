@@ -1,17 +1,13 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.mytechideas.detailsactivity.DetailActivity;
-import com.mytechideas.javajokes.Joker;
 
 
 public class MainActivity extends AppCompatActivity implements EndpointsAsyncTask.AsyncResponse {
@@ -47,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
     }
 
     public void tellJoke(View view) {
-        Joker joker = new Joker();
         asyncTask.execute(this);
 
         //Toast.makeText(this, joker.getJoke(), Toast.LENGTH_SHORT).show();
