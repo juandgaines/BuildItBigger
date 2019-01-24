@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -46,12 +47,15 @@ public class MainActivityFragment extends Fragment implements EndpointsAsyncTask
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
         Button mButton = (Button) root.findViewById(R.id.buttonAsync);
 
+        final ProgressBar spinner;
+        spinner = (ProgressBar)root.findViewById(R.id.progressBar);
         asyncTask.execute(getContext());
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                spinner.setVisibility(View.VISIBLE);
                 if (mInterstitial.isLoaded()) {
                     mInterstitial.show();
 
