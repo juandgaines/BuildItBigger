@@ -9,7 +9,6 @@ public class Joker {
             "\n", "Why do we tell actors to break a leg?\nBecause every play has a cast.","Did you hear about the claustrophobic astronaut?\nHe just needed a little space."};
 
     public String getJoke(){
-
         int index=new Random().nextInt(jokes.length);
         return jokes[index];
     }

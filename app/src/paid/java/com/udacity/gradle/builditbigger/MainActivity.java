@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
 
     private static final String JOKE_STRING= "joke";
 
-    private EndpointsAsyncTask asyncTask= new EndpointsAsyncTask();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
     }
 
     public void tellJoke(View view) {
-        asyncTask.execute(this);
+        new EndpointsAsyncTask().execute(this);
 
         //Toast.makeText(this, joker.getJoke(), Toast.LENGTH_SHORT).show();
     }

@@ -24,33 +24,26 @@ import com.udacity.gradle.builditbigger.R;
 public class MainActivityFragment extends Fragment implements EndpointsAsyncTask.AsyncResponse{
 
     private String joke;
-    private EndpointsAsyncTask asyncTask= new EndpointsAsyncTask(){
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            joke=result;
 
-        }
-    };
 
     public MainActivityFragment() {
 
     }
 
-    private InterstitialAd mInterstitial;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
-
+        final InterstitialAd mInterstitial= new InterstitialAd(getContext());
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
         Button mButton = (Button) root.findViewById(R.id.buttonAsync);
 
         final ProgressBar spinner;
         spinner = (ProgressBar)root.findViewById(R.id.progressBar);
-        asyncTask.execute(getContext());
-        mInterstitial= new InterstitialAd(getContext());
+
+
         mInterstitial.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
@@ -82,9 +75,21 @@ public class MainActivityFragment extends Fragment implements EndpointsAsyncTask
             }
         });
 
+        mInterstitial.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitial.loadAd(new AdRequest.Builder().build());
+
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+                new EndpointsAsyncTask(){
+                    @Override
+                    protected void onPostExecute(String result) {
+                        super.onPostExecute(result);
+                        joke=result;
+
+                    }}.execute(getContext());
 
                 spinner.setVisibility(View.VISIBLE);
                 if (mInterstitial.isLoaded()) {
@@ -94,11 +99,11 @@ public class MainActivityFragment extends Fragment implements EndpointsAsyncTask
                     Log.d("TAG", "The interstitial wasn't loaded yet.");
                 }
 
+
+
             }
         });
 
-        mInterstitial.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        mInterstitial.loadAd(new AdRequest.Builder().build());
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
@@ -118,9 +123,5 @@ public class MainActivityFragment extends Fragment implements EndpointsAsyncTask
         startActivity(intent);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
 
-    }
 }
