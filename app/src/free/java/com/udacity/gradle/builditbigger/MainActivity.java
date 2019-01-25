@@ -12,9 +12,7 @@ import com.mytechideas.detailsactivity.DetailActivity;
 
 public class MainActivity extends AppCompatActivity implements  EndpointsAsyncTask.AsyncResponse{
 
-    private static final String JOKE_STRING= "joke";
 
-    private EndpointsAsyncTask asyncTask= new EndpointsAsyncTask();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -22,7 +22,6 @@ import com.udacity.gradle.builditbigger.R;
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment implements EndpointsAsyncTask.AsyncResponse{
-    private static final String JOKE_STRING= "joke";
 
     private String joke;
     private EndpointsAsyncTask asyncTask= new EndpointsAsyncTask(){
@@ -35,6 +34,7 @@ public class MainActivityFragment extends Fragment implements EndpointsAsyncTask
     };
 
     public MainActivityFragment() {
+
     }
 
     private InterstitialAd mInterstitial;
@@ -50,21 +50,6 @@ public class MainActivityFragment extends Fragment implements EndpointsAsyncTask
         final ProgressBar spinner;
         spinner = (ProgressBar)root.findViewById(R.id.progressBar);
         asyncTask.execute(getContext());
-
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                spinner.setVisibility(View.VISIBLE);
-                if (mInterstitial.isLoaded()) {
-                    mInterstitial.show();
-
-                } else {
-                    Log.d("TAG", "The interstitial wasn't loaded yet.");
-                }
-
-            }
-        });
         mInterstitial= new InterstitialAd(getContext());
         mInterstitial.setAdListener(new AdListener() {
             @Override
@@ -91,11 +76,27 @@ public class MainActivityFragment extends Fragment implements EndpointsAsyncTask
             public void onAdClosed() {
                 // Code to be executed when when the interstitial ad is closed.
                 Intent intent = new Intent(getContext(),DetailActivity.class);
-                intent.putExtra(JOKE_STRING, joke);
-                startActivity(intent);
+                intent.putExtra(DetailActivity.JOKE_STRING, joke);
                 spinner.setVisibility(View.INVISIBLE);
+                startActivity(intent);
             }
         });
+
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                spinner.setVisibility(View.VISIBLE);
+                if (mInterstitial.isLoaded()) {
+                    mInterstitial.show();
+
+                } else {
+                    Log.d("TAG", "The interstitial wasn't loaded yet.");
+                }
+
+            }
+        });
+
         mInterstitial.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         mInterstitial.loadAd(new AdRequest.Builder().build());
         // Create an ad request. Check logcat output for the hashed device ID to
@@ -105,6 +106,7 @@ public class MainActivityFragment extends Fragment implements EndpointsAsyncTask
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         mAdView.loadAd(adRequest);
+
         return root;
     }
 
@@ -112,7 +114,7 @@ public class MainActivityFragment extends Fragment implements EndpointsAsyncTask
     public void processFinish(String output) {
 
         Intent intent = new Intent(getContext(),DetailActivity.class);
-        intent.putExtra(JOKE_STRING,output);
+        intent.putExtra(DetailActivity.JOKE_STRING,output);
         startActivity(intent);
     }
 

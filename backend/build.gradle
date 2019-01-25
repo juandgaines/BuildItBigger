@@ -32,5 +32,5 @@ dependencies {
     implementation project(':javaJokes')
 }
 
-appengine.tools.cloudSdkHome="/Users/juandgaines/Documents/Udacity/Android Developer Nanodegree/Gradle for Android and Java/ud867-master/google-cloud-sdk"
+appengine.tools.cloudSdkHome="/Users/juandgaines/google-cloud-sdk"
 
