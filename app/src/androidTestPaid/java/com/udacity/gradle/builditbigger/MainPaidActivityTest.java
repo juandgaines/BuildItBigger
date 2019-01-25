@@ -27,7 +27,7 @@ public class MainPaidActivityTest {
 
     @Test
     public void testVerifyJoke() throws InterruptedException {
-        assertTrue(true);
+
         final CountDownLatch latch = new CountDownLatch(1);
 
         EndpointsAsyncTask testTask = new EndpointsAsyncTask() {
@@ -35,6 +35,7 @@ public class MainPaidActivityTest {
             @Override
             protected void onPostExecute(String result) {
                 assertNotNull(result);
+
                 if (result != null) {
                     assertTrue(result.length() > 0);
                     latch.countDown();

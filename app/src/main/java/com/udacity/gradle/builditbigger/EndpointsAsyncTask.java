@@ -9,7 +9,6 @@ import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
-import com.mytechideas.javajokes.Joker;
 import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
@@ -44,13 +43,12 @@ public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
         delegate= (AsyncResponse) context;
         //String name = params[0].second;
 
-        Joker joker =new Joker();
-        String joke=joker.getJoke();
+
 
         try {
-            return myApiService.sayHi(joke).execute().getData();
+            return myApiService.sayHi().execute().getData();
         } catch (IOException e) {
-            return e.getMessage();
+            return null;
         }
     }
 

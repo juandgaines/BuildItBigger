@@ -93,6 +93,7 @@ public class MainActivityFragment extends Fragment implements EndpointsAsyncTask
                 Intent intent = new Intent(getContext(),DetailActivity.class);
                 intent.putExtra(JOKE_STRING, joke);
                 startActivity(intent);
+                spinner.setVisibility(View.INVISIBLE);
             }
         });
         mInterstitial.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
@@ -100,10 +101,10 @@ public class MainActivityFragment extends Fragment implements EndpointsAsyncTask
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
-        /*AdRequest adRequest = new AdRequest.Builder()
+        AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
-        mAdView.loadAd(adRequest);*/
+        mAdView.loadAd(adRequest);
         return root;
     }
 
@@ -113,5 +114,11 @@ public class MainActivityFragment extends Fragment implements EndpointsAsyncTask
         Intent intent = new Intent(getContext(),DetailActivity.class);
         intent.putExtra(JOKE_STRING,output);
         startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 }
